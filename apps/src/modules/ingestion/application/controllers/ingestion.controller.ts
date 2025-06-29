@@ -1,6 +1,6 @@
 import { Controller, Inject, Post, Version } from '@nestjs/common';
 import { CsvReader } from '../services/interfaces';
-import { Versioning } from '../../types/version';
+import { Versioning } from '@shared/types/version';
 
 @Controller('/ingestion')
 export class IngestionController {
