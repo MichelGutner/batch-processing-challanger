@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "monorepo": true,
+  "root": "modules/ingestion",
+  "sourceRoot": "modules/ingestion/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "modules/ingestion/tsconfig.app.json"
+  },
+  "projects": {
+    "ingestion": {
+      "type": "application",
+      "root": "modules/ingestion",
+      "entryFile": "main",
+      "sourceRoot": "modules/ingestion/src",
+      "compilerOptions": {
+        "tsConfigPath": "modules/ingestion/tsconfig.app.json"
+      }
+    },
+    "processor": {
+      "type": "application",
+      "root": "modules/processor",
+      "entryFile": "main",
+      "sourceRoot": "modules/processor/src",
+      "compilerOptions": {
+        "tsConfigPath": "modules/processor/tsconfig.app.json"
+      }
+    }
+  }
+}

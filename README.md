@@ -1,107 +1,99 @@
-# Desafio Engenheiro Back-End Pleno 👩‍💻
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-Agradecemos seu interesse em se tornar parte da nossa equipe!
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## Sobre a Empresa e o Ambiente de Trabalho 🚀
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-Somos a **Growth Digital Marketing**, uma empresa especializada em marketing digital focada no mercado de **iGaming**. No nosso time de gestão de tráfego, nossos gestores investem mais de meio milhão de reais por dia em tráfego pago. Estamos em plena expansão, e nossa equipe é composta pelos melhores profissionais em suas áreas. Se você for escolhido, é porque acreditamos que você também é um dos melhores na sua especialidade.
+## Description
 
-Nossa empresa é altamente competitiva, e buscamos a excelência em cada projeto. Valorizamos a entrega pontual e a alta qualidade e mantemos um ambiente colaborativo onde todos se ajudam sempre que possível. Apoiamos o crescimento coletivo, equilibrando a intensidade de um mercado competitivo com uma cultura leve e de cooperação.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Sobre o Ambiente de Trabalho no Departamento de T.I ☕
+## Project setup
 
-O departamento de TI da GDM reflete a cultura colaborativa da empresa. Somos um time de profissionais altamente qualificados com expertise em tecnologias de ponta e uma disposição para compartilhar conhecimento. O nosso setor é composto por engenheiros de frontend e backend que trabalham com tecnologias avançadas, além de um arquiteto de software que lidera a definição das melhores práticas e da infraestrutura, especialmente para soluções escaláveis em iGaming.
+```bash
+$ yarn install
+```
 
-Nosso front-end é desenvolvido com **React.js** e **Next.js**, garantindo interfaces de alta performance. No backend, utilizamos principalmente **Node.js** e **NestJS** junto com uma robusta infraestrutura em nuvem na **AWS**.
+## Compile and run the project
 
-## Stack Necessária 💻
+```bash
+# development
+$ yarn run start
 
-- NodeJS ✔
-- TypeScript ✔
-- Nest.JS ✔
-- Docker ✔
-- MongoDb ✔
-- RabbitMQ ✔
+# watch mode
+$ yarn run start:dev
 
-## Requisitos Técnicos 😁
+# production mode
+$ yarn run start:prod
+```
 
-- Ambas as aplicações devem ser desenvolvidas em NestJS, seguindo os padrões de arquitetura DDD e aplicando os princípios de SOLID.
-- Cada aplicação deve incluir uma imagem Docker e um Dockerfile para facilitar o empacotamento e a execução em containers.
-- Se desejar, pode incluir um docker-compose para cada uma das aplicações, o que facilitará a simulação do deploy na AWS.
-- A comunicação entre as duas aplicações pode ser feita via HTTP, gRPC, ou através de algum sistema de mensageria (como RabbitMQ ou Kafka), à sua escolha, desde que seja justificada e eficiente para o envio em batches.
+## Run tests
 
-## Descrição do Desafio 📰
+```bash
+# unit tests
+$ yarn run test
 
-Se você pensa que o papel de um Engenheiro Back-End se resume a criar C.R.U.D. e consumir APIs, está muito enganado. Estamos procurando alguém que vá além, com habilidade de pensar sistemicamente e atuar de forma crítica em todo o ciclo de desenvolvimento de soluções robustas, escaláveis e orientadas a resultados.
+# e2e tests
+$ yarn run test:e2e
 
-### Objetivo do Projeto
+# test coverage
+$ yarn run test:cov
+```
 
-O objetivo deste projeto é criar uma aplicação robusta para processamento de dados em batch, dividida em duas partes: uma aplicação que realiza a leitura e o envio dos dados em lotes e outra aplicação para recepção e armazenamento eficiente dessas informações, agregando-as por estado e total de pessoas, com a possibilidade de deploy em um ambiente escalável como a **AWS**.
+## Deployment
 
-Você encontrará em nosso repositório um arquivo .csv contendo 10 mil linhas e 4 colunas. Seu desafio como engenheiro back-end será desenvolver duas aplicações utilizando NestJS, aplicando os princípios de DDD (Domain-Driven Design) e SOLID, para processar, tratar e armazenar esses dados.
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-### Aplicação 1 - Leitura e Envio dos Dados:
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-O seu papel é desenvolver uma aplicação que seja capaz de:
+```bash
+$ yarn install -g mau
+$ mau deploy
+```
 
-- Ler o arquivo .csv com eficiência, você pode optar por criar uma rota no controlador para receber o arquivo ou simplesmente ler o arquivo embutido no código, fica ao seu critério.
-- Processar os dados, tratando qualquer inconsistência.
-- Dividir os dados em batches de 1000 registros, respeitando o limite de envio de 1000 dados por segundo para a segunda aplicação.
-- Enviar esses batches para a segunda aplicação por meio de uma interface de comunicação (como uma API REST ou mensageria).
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-### Aplicação 2 - Recepção e Armazenamento dos Dados:
+## Resources
 
-**A segunda aplicação já possui parte do código implementado, mas precisa ser completada.**
+Check out a few resources that may come in handy when working with NestJS:
 
-- Esta aplicação será responsável por:
-- Receber os batches de dados da primeira aplicação.
-- Processar e armazenar os dados recebidos em um banco de dados não relacional, preferencialmente MongoDB, utilize a ODM que melhor agradar.
-- O dado que será armazenado no banco é o nome dos estados presentes no arquivo .csv, juntamente com a quantidade total de pessoas para cada estado (i.e., um somatório de pessoas por estado).
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-### Etapas:
+## Support
 
-1. Leitura de Dados (Aplicação 1):
-   
-- Ler o arquivo .csv com 10 mil linhas de maneira eficiente, evitando carregar o arquivo inteiro na memória de uma vez.
-- Processar os dados para garantir sua integridade (tratar dados nulos, duplicados, etc.).
-- Implementar uma lógica de envio dos dados em batches de 1000 registros por segundo para a segunda aplicação.
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-2. Armazenamento e Processamento (Aplicação 2):
+## Stay in touch
 
-- Completar a aplicação para que ela possa receber os dados enviados pela primeira aplicação em batches.
-- Armazenar as informações no MongoDB, salvando a quantidade total de pessoas por estado.
-- Garantir que a aplicação seja capaz de lidar com grande volume de dados sem perda ou duplicidade.
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-3. Deploy e Execução:
+## License
 
-- Criar Dockerfiles para ambas as aplicações, garantindo que elas possam ser empacotadas e executadas em containers de forma isolada.
-- Opcionalmente, criar um docker-compose para simular o ambiente de produção.
-- Certifique-se de que a solução seja escalável e eficiente para um possível deploy na AWS.
-
-### Considerações:
-
-**A segunda aplicação é esta que contem o arquivo de instruções, o CSV, você encontra na pasta support**
-
-A solução deve ser testável e escalável, garantindo que possa suportar o envio contínuo de dados em batch.
-Utilize boas práticas de desenvolvimento, como testes unitários, tratamento de erros, e logs para monitorar o comportamento das aplicações.
-Documente a solução para facilitar a compreensão e o deploy por outros desenvolvedores ou engenheiros.
-
-## Diferenciais 💖
-
-- Experiência com sistemas de mensageria como RabbitMQ ou Kafka.
-- Conhecimento em práticas de CI/CD.
-- Familiaridade com deploy em ambientes de produção na AWS.
-
-## Critérios de Avaliação 📊
-
-- Qualidade do código, organização e aderência aos princípios de DDD e SOLID.
-- Eficiência na leitura e processamento dos dados do arquivo .csv.
-- Capacidade de enviar os dados em batches respeitando o limite de 1000 registros por segundo.
-- Implementação do armazenamento eficiente dos dados no banco de dados MongoDB.
-- Uso adequado de containers Docker e, se aplicável, docker-compose.
-
-## Próximos Passos
-
-Envie o link da aplicação e do repositório para nosso time de recrutamento em [vagas@gdigitalmkt.com].
-
-**Boa sorte e mãos à obra!**
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

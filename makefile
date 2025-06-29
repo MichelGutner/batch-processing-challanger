@@ -7,5 +7,8 @@ down:
 build:
 	docker-compose build
 
-init:
-	cd apps && yarn && yarn start:dev
+build-ingestion:
+	yarn && yarn build && yarn start:dev:ingestion
+
+build-processor:
+	yarn && yarn build && yarn start:dev:processor
