@@ -1,4 +1,4 @@
-import { Person } from '@modules/ingestion/src/domain';
+import { Person } from '@common/src/domain';
 import { Batcher } from './interfaces';
 import { Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';

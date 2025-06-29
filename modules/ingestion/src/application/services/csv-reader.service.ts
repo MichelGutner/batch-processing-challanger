@@ -3,7 +3,7 @@ import { CsvReader } from './interfaces';
 import { Logger } from '@modules/logger/application';
 import * as fs from 'fs';
 import * as csv from 'fast-csv';
-import { Person } from '@modules/ingestion/src/domain';
+import { Person } from '@common/src/domain';
 
 @Injectable()
 export class CsvReaderService implements CsvReader {

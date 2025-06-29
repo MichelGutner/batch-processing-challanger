@@ -1,4 +1,4 @@
-import { Person } from '@modules/ingestion/src/domain';
+import { Person } from '@common/src/domain';
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 // import { P } from 'pino';
