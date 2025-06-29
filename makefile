@@ -7,3 +7,5 @@ down:
 build:
 	docker-compose build
 
+init:
+	cd apps && cd ingestion && yarn && yarn start:dev
