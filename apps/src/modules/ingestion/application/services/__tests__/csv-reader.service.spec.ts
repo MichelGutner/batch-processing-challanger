@@ -1,5 +1,4 @@
 import { CsvReaderService } from '../csv-reader.service';
-import * as fs from 'fs';
 import * as csv from 'fast-csv';
 import { Logger } from '@modules/logger/application';
 
