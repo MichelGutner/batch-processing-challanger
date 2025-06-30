@@ -1,99 +1,121 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+### 🧩 Batch Processing Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este repositório contém duas aplicações desenvolvidas como parte de um desafio técnico de processamento de dados em batch com foco em mensageria, escalabilidade e boas práticas de engenharia de software.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 🏗️ Visão Geral
 
-## Description
+O sistema é dividido em duas aplicações:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Aplicação 1 - Ingestion (Leitura e Envio dos Dados): Responsável por ler um arquivo .csv com dados de pessoas, processar e enviar os dados em batches.
 
-## Project setup
+Aplicação 2 - Processor (Recepção e Armazenamento dos Dados): Recebe os batches via mensageria e agrega os dados no MongoDB, agrupando por estado.
 
-```bash
-$ yarn install
+### 📦 Tecnologias Utilizadas
+
+**_NestJS (arquitetura modular e escalável)_**
+
+**_MongoDB com Mongoose_**
+
+**_RabbitMQ (mensageria via Microservices NestJS)_**
+
+**_Docker e Docker Compose_**
+
+**_TypeScript_**
+
+**_fast-csv para leitura eficiente de arquivos CSV_**
+
+**_Jest para testes unitários_**
+
+**_Pino + nestjs-pino para logging estruturado_**
+
+## 🔁 Arquitetura
+
+A arquitetura é baseada em DDD (Domain-Driven Design) e princípios SOLID, com foco em desacoplamento e testabilidade. O sistema segue o padrão de event-driven architecture via RabbitMQ.
+
+apps/
+├── common/ # Código e recursos compartilhados entre aplicações
+├── config/ # Configurações globais e arquivos de ambiente
+├── modules/ # Módulos comuns ou específicos que podem ser reutilizados
+├── ingestion/ # Aplicação 1 - Leitura e envio dos dados
+└── processor/ # Aplicação 2 - Recepção e armazenamento dos dados
+
+## 📂 Estrutura dos Dados
+
+O arquivo ingestion.csv contém os seguintes campos:
+
+csv
+Copiar
+Editar
+id,name,phone,state
+A aplicação processa os dados e realiza agregação por state.
+
+## 🚀 Aplicação 1 - Ingestion
+
+Funcionalidades
+Leitura eficiente de arquivos .csv com até 10.000 linhas.
+
+Tratamento de dados inconsistentes (validação, dados nulos, etc.).
+
+Envio em batches de até 1000 registros por segundo via RabbitMQ.
+
+Arquitetura desacoplada com uso de interfaces e services.
+
+Endpoint de Processamento
+POST /v1/ingestion
+Content-Type: multipart/form-data
+Body: file (.csv)
+Query Params:
+
+- batchSize (opcional, padrão: 1000)
+- delimiter (opcional, padrão: ",")
+  Testes
+  Cobertura de testes com Jest para serviços e use cases principais.
+
+## 💾 Aplicação 2 - Processor
+
+Funcionalidades
+Recebe mensagens da fila Csv_Process.
+
+Processa os dados e atualiza o banco MongoDB com:
+
+Nome do estado.
+
+Total de pessoas associadas a ele.
+
+Usa Mongoose para integração com o MongoDB.
+
+Agregação no MongoDB
+Cada documento representa um estado:
+
+```
+{
+  "stateName": "MG",
+  "numberOfPersons": 1234
+}
 ```
 
-## Compile and run the project
+## 🐳 Docker & Execução
 
-```bash
-# development
-$ yarn run start
+docker-compose up --build
+Estrutura do Compose - yaml
+services:
+rabbitmq: gerencia filas e mensagens
+mongo: banco não relacional
+ingestion: aplicação 1 (envia dados)
+processor: aplicação 2 (processa dados)
+RabbitMQ UI: http://localhost:15672
+MongoDB: mongodb://localhost:27017
 
-# watch mode
-$ yarn run start:dev
+## 📜 Scripts Importantes
 
-# production mode
-$ yarn run start:prod
+## Iniciar desenvolvimento das aplicações
+
+```
+  make up
+  make build-ingestion:
+  make build-processor:
 ```
 
-## Run tests
+# Testes unitários
 
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+``npm run test``
