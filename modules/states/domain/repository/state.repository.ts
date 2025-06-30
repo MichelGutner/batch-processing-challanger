@@ -1,8 +1,7 @@
-import { State } from "@modules/states/infrastructure/mongoose/states.schema";
+import { State } from '@modules/states/infrastructure/mongoose/states.schema';
 
-export abstract class StateRepository {
-    abstract create(state: State): Promise<State>;
-    abstract update(state: State): Promise<State>;
-    abstract findByStateName(stateName: string): Promise<State | null>;
-  }
-  
+export type StateRepository = {
+  create: (state: State) => Promise<State>;
+  update: (state: State) => Promise<State>;
+  findByStateName: (stateName: string) => Promise<State | null>;
+};

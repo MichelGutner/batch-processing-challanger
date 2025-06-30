@@ -1,16 +1,18 @@
 import { Module } from '@nestjs/common';
-import { ConsumerController } from './controllers/consumer.controller';
+import { ProcessorController } from './controllers/processor.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { HttpModule } from '@nestjs/axios';
-import { ConsumerService } from './services/consumer.service';
+import { ProcessorService } from './services/processor.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { StateServiceImpl } from '@modules/states/application/services/state.service';
 import { StateModule } from '@modules/states/application/state.module';
+import { LoggerModule } from '@modules/logger';
 
 @Module({
   imports: [
     HttpModule,
     StateModule,
+    LoggerModule,
     MongooseModule.forRoot('mongodb://localhost:27017/batch-processing'),
     ClientsModule.register([
       {
@@ -26,17 +28,17 @@ import { StateModule } from '@modules/states/application/state.module';
       },
     ]),
   ],
-  controllers: [ConsumerController],
+  controllers: [ProcessorController],
   providers: [
-    ConsumerService,
+    ProcessorService,
     StateServiceImpl,
     {
       provide: 'StatesService',
       useClass: StateServiceImpl,
     },
     {
-      provide: 'Consumer',
-      useClass: ConsumerService,
+      provide: 'Processor',
+      useClass: ProcessorService,
     },
   ],
   exports: [],

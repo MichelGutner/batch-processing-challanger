@@ -20,7 +20,7 @@ export class BatcherService implements Batcher {
       setTimeout(async () => {
         const result = await this.rabbitMq.emit(
           'Csv_Process',
-          JSON.stringify(batch),
+          batch,
         );
         
       }, 1000 * currentBatch);

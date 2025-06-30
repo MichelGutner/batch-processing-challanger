@@ -1,8 +1,7 @@
-import { StateRepository } from '@modules/states/domain/repository';
 import { Inject, Injectable } from '@nestjs/common';
-import { StateInputDto } from '../dtos/state.dto';
 import { StateService } from './interfaces';
 import { Person } from '@common/src/domain';
+import { StateRepository } from '@modules/states/domain/repository';
 
 @Injectable()
 export class StateServiceImpl implements StateService {
