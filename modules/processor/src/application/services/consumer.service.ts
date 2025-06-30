@@ -1,22 +1,18 @@
 import { Person } from '@common/src/domain';
-import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
-// import { P } from 'pino';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Consumer } from './interfaces/consumer.interface';
+import { StateService } from '@modules/states/application/services/interfaces';
 
 @Injectable()
-export class ConsumerService {
+export class ConsumerService implements Consumer {
   private readonly logger = new Logger(ConsumerService.name);
 
-  constructor(private readonly httpService: HttpService) {}
-  async executeLongRunningTask(data: Person): Promise<void> {
-    this.logger.log('Execute long running task >> ', JSON.stringify(data));
-    this.logger.debug(data);
+  constructor(
+    @Inject('StatesService')
+    private readonly stateService: StateService,
+  ) {}
 
-    this.logger.log('process complete');
-
-    await this.httpService.axiosRef.post(
-      `${'localhost://3001'}/ingestion/process-complete`,
-      data,
-    );
+  async execute(data: Person[]): Promise<void> {
+    await this.stateService.execute(data);
   }
 }

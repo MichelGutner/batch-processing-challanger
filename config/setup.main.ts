@@ -11,8 +11,6 @@ export async function setupApplication(app: INestApplication): Promise<void> {
     defaultVersion: '1',
   });
 
-  // await app.startAllMicroservices();
-
   app.useLogger(logger);
 
   await app.listen(process.env.PORT ?? 3000);
